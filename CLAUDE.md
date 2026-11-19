@@ -9,7 +9,7 @@ so quality checks below are mandatory.
 1. `./setup.sh` (installs packages, downloads the AI4Bharat Hindi voice model ~1.5 GB).
 2. Read `log/state.json`.
    - If `queue` is not empty, take the first item. If it has `"youtube_id"`, the video was already uploaded
-     as private: just publish it (step 6b) and skip to step 7. Otherwise build it with its `cover` lines.
+     as private: skip building and uploading, run steps 6c–6e with that id, then step 7. Otherwise build it with its `cover` lines.
    - If `queue` is empty, write a NEW story (next section) as `stories/NN_slug/`
      (NN = `next_number`).
 3. Build: `python3 engine/build.py stories/NN_slug "<cover line 1>" "<cover line 2>" <hook_time>`
