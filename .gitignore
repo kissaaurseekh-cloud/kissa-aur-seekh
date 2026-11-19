@@ -1,0 +1,8 @@
+models/
+stories/*/vo/
+stories/*/out/
+stories/*/stills/
+stories/*/sheet.jpg
+__pycache__/
+*.wav
+raw.wav
