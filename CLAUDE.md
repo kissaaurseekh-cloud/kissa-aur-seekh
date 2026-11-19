@@ -20,17 +20,20 @@ so quality checks below are mandatory.
 5. Commit and push: `git add -A && git commit -m "Story NN: <title>" && git -c push.negotiate=true push`.
    Video URL = `https://raw.githubusercontent.com/kissaaurseekh-cloud/kissa-aur-seekh/main/videos/NN_slug.mp4`
    (check it returns 200 with `curl -sI`).
-6. Upload with the Zapier MCP: YouTube (`YouTubeV4CLIAPI`) action `upload_video`:
-   - `video` = raw URL above, `thumbnail` = raw URL of the cover jpg
-   - `title`, `description`, `tags` (list) – see "Metadata" below
-   - `privacy_status` = `public`, `made_for_kids` = `false`, `category_id` = `27` (Education),
-     `default_language` = `hi`, `default_audio_language` = `hi`, `notify_subscribers` = `true`
-   - 6b. Publishing an already-uploaded private video: YouTube `_zap_raw_request` (Make API Mutating Request)
-     `PUT https://www.googleapis.com/youtube/v3/videos?part=status` body
-     `{"id":"<id>","status":{"privacyStatus":"public","selfDeclaredMadeForKids":false,"containsSyntheticMedia":true}}`
-   - After a fresh upload, set the AI disclosure the same way:
-     `{"id":"<id>","status":{"privacyStatus":"public","selfDeclaredMadeForKids":false,"containsSyntheticMedia":true}}`
-   - Add it to the playlist "1 Minute Moral Stories | Hindi Kahaniyan" (action `add_video_to_playlist`) if found.
+6. Upload with the Zapier MCP (YouTube app, `selected_api` = `YouTubeV4CLIAPI`). Always `inspect_zapier_actions` first.
+   a. Fresh video: action `upload_video` with `video` = raw URL above, `title`, `description`, `tags` (list),
+      `privacy_status` = `public`, `made_for_kids` = `false`, `category_id` = `27` (Education),
+      `default_language` = `hi`, `default_audio_language` = `hi`, `license` = `youtube`. Note the returned `id`.
+   b. Already-uploaded private video (queue item has `youtube_id`): skip 6a and use that id.
+   c. Status + AI disclosure (both cases): action `_zap_raw_request` (tool `youtube_make_api_mutating_request`),
+      `method` = `PUT`, `url` = `https://www.googleapis.com/youtube/v3/videos`, `querystring` = `{"part":"status"}`,
+      `headers` = `{"Content-Type":"application/json"}`, `fail_on_errors` = `false`, `body` =
+      `{"id":"<id>","status":{"privacyStatus":"public","selfDeclaredMadeForKids":false,"containsSyntheticMedia":true,"license":"youtube","embeddable":true,"publicStatsViewable":true}}`
+      (PUT replaces the whole status, so send every field). Check the response says `"privacyStatus":"public"`.
+   d. Thumbnail: action `upload_video_thumbnail` with `video_id` and `thumbnail` = raw URL of the cover jpg
+      (skip if the queue item has "thumbnail_done": true).
+   e. Playlist: action `add_video_to_playlist` (inspect it; resolve the playlist enum) into
+      "1 Minute Moral Stories | Hindi Kahaniyan with Seekh" (id `PLD5ufVzMwbPM`).
 7. Update `log/state.json`: move the item to `published` (slug, title, youtube_id, date), increase
    `next_number` if a new story was made, and delete `videos/*.mp4` older than the 3 newest to keep the repo
    small (`git rm`). Commit and push.
