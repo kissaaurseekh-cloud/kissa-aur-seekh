@@ -9,7 +9,7 @@ so quality checks below are mandatory.
 1. `./setup.sh` (installs packages, downloads the AI4Bharat Hindi voice model ~1.5 GB).
 2. Read `log/state.json`.
    - If `queue` is not empty, take the first item. If it has `"youtube_id"`, the video was already uploaded
-     as private: skip building and uploading, run steps 6c–6e with that id, then step 7. Otherwise build it with its `cover` lines.
+     as private: skip building and uploading, run steps 6c–6f with that id, then step 7. Otherwise build it with its `cover` lines.
    - If `queue` is empty, write a NEW story (next section) as `stories/NN_slug/`
      (NN = `next_number`).
 3. Build: `python3 engine/build.py stories/NN_slug "<cover line 1>" "<cover line 2>" <hook_time>`
@@ -34,6 +34,11 @@ so quality checks below are mandatory.
       (skip if the queue item has "thumbnail_done": true).
    e. Playlist: action `add_video_to_playlist` (inspect it; resolve the playlist enum) into
       "1 Minute Moral Stories | Hindi Kahaniyan with Seekh" (id `PLD5ufVzMwbPM`).
+   f. Hindi subtitles: action `code_action_youtubev4cliapi__upload_caption_from_url` (YouTube app) with
+      `video_id`, `srt_url` = raw URL of `videos/NN_slug_hi.srt` (made by build.py; commit it in step 5),
+      `language` = `hi`, `name` = `Hindi` (skip if the queue item has "captions_done": true).
+      If this custom action is missing, recreate it with `write_code_action` (YouTube captions.insert,
+      multipart upload, SRT downloaded from a public URL) and retry once; a failure here never blocks publishing.
 7. Update `log/state.json`: move the item to `published` (slug, title, youtube_id, date), increase
    `next_number` if a new story was made, and delete `videos/*.mp4` older than the 3 newest to keep the repo
    small (`git rm`). Commit and push.
