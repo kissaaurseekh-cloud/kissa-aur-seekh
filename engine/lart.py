@@ -1,5 +1,5 @@
 import skia, math, random, sys, os
-sys.path.insert(0, '/home/claude/kissa-aur-seekh/engine')
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from gart import C, P, lerp, ease, clamp, mixc, blend, sun, cloud, face, mouth, ramu, seth, house, draw_key, bubble, sparkle, brick_pile, cement_bag, sand_heap, heart
 from hart import man
 from tart import boy

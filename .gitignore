@@ -6,3 +6,6 @@ stories/*/sheet.jpg
 __pycache__/
 *.wav
 raw.wav
+long/*/vo/
+long/*/out/
+long/*/sheet.jpg

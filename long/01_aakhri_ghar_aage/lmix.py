@@ -1,5 +1,6 @@
 import numpy as np, soundfile as sf, sys
 sys.argv=['x','none']
+__file__ = __import__('os').path.abspath('lrender.py')
 exec(open('lrender.py').read().split("if __name__")[0])
 SR=24000; rng=np.random.default_rng(9)
 tl=build_timeline()

@@ -36,7 +36,38 @@
    "emotional story hindi",
    "1 minute story"
   ],
-  "youtube_id": null
+  "youtube_id": null,
+  "scenes": [
+   "monsoon",
+   "confess"
+  ],
+  "top": [
+   "आख़िरी घर",
+   "आगे क्या हुआ?"
+  ],
+  "end_line": "आगे क्या हुआ? क्या रामू, अपनी गलती सुधार पाया? पूरी कहानी देखिए, नीचे दिए लिंक पर।",
+  "end_text": [
+   "आगे क्या हुआ?",
+   "क्या रामू अपनी गलती",
+   "सुधार पाया?"
+  ]
  },
- "short_part1_id": "YiV5tONCfl8"
+ "short_part1_id": "YiV5tONCfl8",
+ "chapters": {
+  "storm": "Aakhri Ghar ki kahani",
+  "movein": "Kamzor ghar mein naya jeevan",
+  "monsoon": "Pehla monsoon",
+  "confess": "Ramu ka sach",
+  "decision": "Ramu ka faisla",
+  "rebuild": "Naya ghar, nayi neenv",
+  "village": "Gaon ki madad",
+  "newhouse": "Sabse achha ghar",
+  "lesson": "Seekh"
+ },
+ "thumb": {
+  "scene": "storm",
+  "t": 1.3,
+  "l1": "आख़िरी घर",
+  "l2": "आगे क्या हुआ?"
+ }
 }

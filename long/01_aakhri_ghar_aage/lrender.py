@@ -1,13 +1,15 @@
 import skia, numpy as np, json, math, subprocess, os, sys
 from PIL import Image, ImageDraw, ImageFont
-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+_HERE = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, _HERE)
+sys.path.insert(0, os.path.join(_HERE, '..', '..', 'engine'))
 from lart import *
 from lscript import SCENES
 
 FPS = 30
 W, H = LW, LH
 DUR = json.load(open('vo/durs.json'))
-FB = '/home/claude/kissa-aur-seekh/assets/fonts/Hind-Bold.ttf'
+FB = os.path.join(_HERE, '..', '..', 'assets', 'fonts', 'Hind-Bold.ttf')
 LEAD = dict(storm=3.6, monsoon=2.6, newhouse=2.8, lesson=0.9, outro=0.5)
 TAIL = dict(rebuild=6.5, newhouse=2.2, outro=1.6, storm=0.8, decision=1.6, village=1.4)
 

@@ -3,6 +3,7 @@
 This repo makes and publishes one vertical (1080×1920) Hindi moral-story YouTube Short a day
 for the channel **Kissa Aur Seekh** (@KissaAurSeekh). Owner: Akshita. Publishing is fully automatic,
 so quality checks below are mandatory.
+Weekly long videos (Saturday pick, Sunday long video, Monday teaser) follow `long/LONG.md`.
 
 ## Daily run (do these in order)
 

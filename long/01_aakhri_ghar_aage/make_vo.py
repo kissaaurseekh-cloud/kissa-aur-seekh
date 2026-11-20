@@ -1,5 +1,5 @@
 import sys, json, numpy as np, soundfile as sf, subprocess
-sys.path.insert(0,'/home/claude'); from ai4b_tts import say
+import os as _o; sys.path.insert(0,_o.path.join(_o.path.dirname(_o.path.abspath(__file__)),'..','..','engine')); from ai4b_tts import say
 from lscript import SCENES
 out={}
 for sid,lines in SCENES:
