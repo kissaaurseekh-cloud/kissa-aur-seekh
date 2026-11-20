@@ -33,4 +33,5 @@ run(['ffmpeg', '-y', '-loglevel', 'error', '-f', 'concat', '-safe', '0', '-i', '
 final = os.path.join(vid, f'{name}.mp4')
 run(['ffmpeg', '-y', '-loglevel', 'error', '-i', 'video.mp4', '-i', 'audio.wav', '-map', '0:v', '-map', '1:a', '-c:v', 'copy',
      '-af', 'apad', '-c:a', 'aac', '-b:a', '192k', '-shortest', final], cwd=out)
+run(['python3', os.path.join(ROOT, 'engine', 'make_srt.py'), story, 'render.py', os.path.join(vid, f'{name}_hi.srt')])
 print('DONE', final, cover)
