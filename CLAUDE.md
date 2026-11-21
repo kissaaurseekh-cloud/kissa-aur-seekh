@@ -40,6 +40,18 @@ Weekly long videos (Saturday pick, Sunday long video, Monday teaser) follow `lon
       `language` = `hi`, `name` = `Hindi` (skip if the queue item has "captions_done": true).
       If this custom action is missing, recreate it with `write_code_action` (YouTube captions.insert,
       multipart upload, SRT downloaded from a public URL) and retry once; a failure here never blocks publishing.
+   g. English subtitles: write `videos/NN_slug_en.srt` (same numbering and timings as the `_hi.srt`, each line
+      translated into simple natural English; commit it in step 5) and upload it with the same caption action,
+      `language` = `en`, `name` = `English` (skip if "captions_en_done": true). Never blocks publishing.
+   h. English title/description (so the video also shows up for English-language viewers): `_zap_raw_request`
+      PUT `https://www.googleapis.com/youtube/v3/videos`, `querystring` = `{"part":"localizations"}`, `body` =
+      `{"id":"<id>","localizations":{"en":{"title":"<en_title>","description":"<en_description>"}}}`.
+      If that errors, GET `videos?part=snippet` and PUT `part=snippet,localizations` with the full snippet
+      (title, categoryId, description, tags, defaultLanguage `hi`) plus the localizations. Never blocks publishing.
+   i. First comment: `_zap_raw_request` POST `https://www.googleapis.com/youtube/v3/commentThreads`,
+      `querystring` = `{"part":"snippet"}`, body
+      `{"snippet":{"videoId":"<id>","topLevelComment":{"snippet":{"textOriginal":"<comment>"}}}}`.
+      Never blocks publishing.
 7. Update `log/state.json`: move the item to `published` (slug, title, youtube_id, date), increase
    `next_number` if a new story was made, and delete `videos/*.mp4` older than the 3 newest to keep the repo
    small (`git rm`). Commit and push.
@@ -66,14 +78,40 @@ Weekly long videos (Saturday pick, Sunday long video, Monday teaser) follow `lon
   sound effects. Keep voice clearly louder than music (ducking is already in the file).
 - Cover lines: 2 short Hindi lines (≤ 22 characters each) that tease the twist, e.g. "सबसे खराब घर…" / "किसका था?".
 
-## Metadata (every video)
+## Metadata (every video) – written for maximum reach
 
-- Title (≤ 100 chars): Hinglish hook + emoji + `| Hindi Moral Story #shorts`
-  e.g. `Usne Sabse Kharab Ghar Banaya… Phir Pata Chala Woh Kiska Hai 😳 | Hindi Moral Story #shorts`
-- Description: line 1 the Hindi hook; blank line; 3–5 Hinglish sentences telling the story without the
-  ending; `Seekh: …`; `Kissa Aur Seekh par roz milegi ek nayi 1-minute Hindi moral story. Kahani achhi lagi to
-  Like, Share aur Subscribe zaroor karein!`; then
-  `#shorts #hindistory #moralstory #hindikahani #motivation #kissaaurseekh` (+1–2 topic tags).
-- Tags (≤ 500 chars total): hindi moral story, moral stories in hindi, hindi kahani, hindi kahaniyan,
-  motivational story in hindi, prerak kahani, hindi short story, 1 minute story, kissa aur seekh,
-  + 6–8 story-specific ones (English and Hinglish names of the story).
+Goal: get found in YouTube search and pushed in the Shorts feed by Hindi AND Hinglish/English searchers.
+Put what people actually type first (deity/story names), keep the curiosity hook, and give every
+video English subtitles + an English title/description (steps 6g–6h) and a question comment (step 6i).
+
+- Title (≤ 70 chars; the first ~40 chars must work alone because the Shorts feed cuts the rest):
+  `<Hinglish hook with the main keyword> <1 emoji> <short Devanagari keyword phrase> #shorts`.
+  - God stories: name the deity in the hook in the way people search (Shiv Ji / Mahadev, Hanuman Ji,
+    Krishna, Ganesh Ji…) and add the Devanagari phrase "<deity> की कहानी".
+    e.g. `Shiv Ji Ne Zehar Kyun Piya? 😳 नीलकंठ की कहानी #shorts`
+  - Other stories: `<hook> <emoji> हिंदी कहानी #shorts`,
+    e.g. `Usne Sabse Kharab Ghar Banaya… Kiska Tha? 😳 हिंदी कहानी #shorts`
+  - No ALL CAPS, no clickbait the video doesn't deliver.
+- Description:
+  1. Line 1: the Hindi hook, repeating the main keyword (e.g. "शिव जी ने ज़हर क्यों पिया? 🔱").
+  2. Line 2: the same hook in Hinglish (e.g. "Shiv Ji ne zehar kyun piya? Neelkanth ki kahani").
+  3. Blank line; 3–5 Hinglish sentences telling the story without the ending, naturally using 2–3 search
+     phrases (story name, deity name, e.g. "samudra manthan", "Mahadev ki kahani").
+  4. `Seekh: …`; for god stories also `Katha: <source>` (e.g. Shiv Puran / Bhagwat Puran / Ramayan).
+  5. A question line that invites comments, e.g. "Aapko is kahani se kya seekh mili? Comment mein batayein 🙏".
+  6. `Kissa Aur Seekh par roz milegi ek nayi 1-minute Hindi moral story. Kahani achhi lagi to Like, Share aur
+     Subscribe zaroor karein!`
+  7. Last line, 5–7 hashtags, most specific first (the first three show above the title):
+     god stories e.g. `#mahadev #shivji #shorts #hindistory #bhakti #kissaaurseekh`;
+     other stories e.g. `#shorts #hindistory #moralstory #hindikahani #motivation #kissaaurseekh`.
+- Tags (≤ 500 chars total): story-specific first — 8–10 variants of the story/deity name in English,
+  Hinglish and Devanagari (e.g. "neelkanth story", "shiv ji ki kahani", "शिव जी की कहानी", "samudra manthan",
+  "mahadev story", "har har mahadev", "bhakti story") — then the general ones: hindi moral story,
+  moral stories in hindi, hindi kahani, prerak kahani, 1 minute story, kissa aur seekh.
+- English localization (step 6h): `en_title` = natural English version of the title keeping the keyword
+  (e.g. "Why Did Lord Shiva Drink the Poison? 😳 Neelkanth Story #shorts"); `en_description` = 3–4 English
+  lines (hook, story without ending, lesson) + the same hashtags.
+- First comment (step 6i): one short Hinglish question that is easy to answer, e.g.
+  "Agar aap wahan hote to kya karte? 🤔 Comment mein 'Har Har Mahadev' likhiye 🙏".
+- Queue items may already carry `title`, `description`, `tags`, `en_title`, `en_description`, `comment`;
+  use them as given.

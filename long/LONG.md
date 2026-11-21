@@ -5,6 +5,9 @@ plus a vertical teaser Short on Monday ~1 PM IST that links to it. Owner: Akshit
 State lives in `log/weekly.json` (`weeks` list, newest last). "This week" = the coming/current Sunday's date.
 
 Zapier YouTube app = `YouTubeV4CLIAPI`; always `inspect_zapier_actions` before executing.
+Titles, descriptions, tags, English subtitles/localization and the first comment for the long video and the
+teaser follow the reach rules in CLAUDE.md ("Metadata" and steps 6g–6i); long-video titles may be up to 90
+chars and keep "| Kissa Aur Seekh" at the end.
 Raw file URL base: `https://raw.githubusercontent.com/kissaaurseekh-cloud/kissa-aur-seekh/main/`
 
 ## Saturday ~8 PM: pick the winner
