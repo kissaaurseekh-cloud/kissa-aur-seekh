@@ -32,7 +32,7 @@ Raw file URL base: `https://raw.githubusercontent.com/kissaaurseekh-cloud/kissa-
 3. Create `long/NN_<slug>_long/` (NN = next number) by copying `long/01_aakhri_ghar_aage/`
    (lscript.py, lrender.py, lmix.py, make_vo.py, meta.json; not the mp4/jpg/srt files).
 4. Write a **sequel or deeper version** of the Short: 10–12 scenes, about 4–6 minutes, one emotional turn,
-   the same lesson made stronger. Open with a 10–15 s storm/title hook and a short recap of the Short,
+   the same lesson made stronger. Open with a 10–15 s suspense hook (a visual mystery + a question, like the daily Shorts) and a short recap of the Short,
    end with the `lesson` (first line "सीख।") and the unchanged `outro`. Speakers `F` (narrator, women,
    children, animals) and `M` (men). Kid-safe.
 5. `lrender.py`: rewrite the `s_<scene>` functions and `FN` with engine characters (lart.py: `kamla`,

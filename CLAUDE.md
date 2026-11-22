@@ -66,7 +66,13 @@ Weekly long videos (Saturday pick, Sunday long video, Monday teaser) follow `lon
   village path + pots (03), garden + boy/grandfather + butterfly (04), night kitchen + frogs (05).
 - `script.py`: same format. Speakers: `F` = female narrator (also voices non-human characters),
   `M` = male voice for men. 8–10 scenes, total speech **50–58 s**. Short spoken sentences, commas for pauses.
-  Hook first scene: a question/shock that makes viewers stay ("…आखिर क्यों?").
+  **Suspense hook is mandatory** (rule from Akshita, Nov 2026 – "हाथी और रस्सी" got ~500 views in a day
+  with this style; the others got under 10). The first scene (2–4 s) must show a strange, visual mystery
+  and ask WHY before any setup: e.g. "इतना बड़ा हाथी… पतली रस्सी से क्यों बंधा है?",
+  "ये आदमी रोज़ खाली बाल्टी लेकर कुएँ पर क्यों जाता है?". Show the mysterious thing on screen with a big "?"
+  and the title; never start with "एक गाँव में…". Reveal the answer only near the end (twist), then the lesson.
+  Prefer stories with a visual puzzle, animals or everyday objects, and a mindset/life lesson.
+  Cover lines and the video title must repeat the same mystery question.
   Keep the `lesson` scene (first line exactly "सीख।") and the `outro` scene **unchanged** (English
   LIKE / SHARE / SUBSCRIBE buttons are drawn by `s_outro`).
 - `render.py`: change the `s_<scene>` functions and the `FN = dict(...)` map. Reuse characters from
