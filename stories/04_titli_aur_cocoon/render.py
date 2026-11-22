@@ -84,6 +84,9 @@ def s_hook(c, t, Tt, L):
     if after(L, 1, t, .2): flyers(c, t, 3, y0=480)
     title = T('title', 'तितली और कोकून', 120, fill=(255, 244, 220, 255), stroke=(110, 40, 80, 255), sw=10)
     k = ease(t / .5); draw_img(c, title, W / 2, 190, k, 0.85 + .15 * k)
+    if after(L, 1, t, .3):
+        q = T('q', '?', 220, fill=(255, 214, 64, 255), stroke=(80, 40, 0, 255), sw=10)
+        draw_img(c, q, W / 2, 400 + math.sin(t * 4) * 12, ease((t - L[1][0] - .3) / .3), 0.9 + .1 * math.sin(t * 6))
 
 def s_garden(c, t, Tt, L):
     garden(c, t)
