@@ -1,6 +1,8 @@
 """Build one story end to end.
 usage: python3 engine/build.py stories/NN_name "cover line 1" "cover line 2" [hook_time]
-Writes videos/NN_name.mp4 (with 0.5 s cover at the end) and videos/NN_name_cover.jpg
+Writes videos/NN_name.mp4 and videos/NN_name_cover.jpg (the cover is the YouTube thumbnail).
+Since Nov 2026 (Short v2) the cover is NOT appended to the video: the last frame must loop back into the hook.
+Set COVER_TAIL=1 to get the old behaviour.
 """
 import sys, os, subprocess, importlib.util
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -23,7 +25,7 @@ run(['python3', 'mix.py'])
 out = os.path.join(story, 'out')
 with open(os.path.join(out, 'list.txt'), 'w') as f:
     for i, s in enumerate(sids): f.write(f"file '{i:02d}_{s}.mp4'\n")
-    f.write("file 'cover.mp4'\n")
+    if os.environ.get('COVER_TAIL') == '1': f.write("file 'cover.mp4'\n")
 vid = os.path.join(ROOT, 'videos'); os.makedirs(vid, exist_ok=True)
 cover = os.path.join(vid, f'{name}_cover.jpg')
 run(['python3', os.path.join(ROOT, 'engine', 'make_cover.py'), story, 'render.py', sids[0], hook_t, l1, l2, cover])

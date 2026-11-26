@@ -5,7 +5,7 @@ usage: python3 engine/build_long.py long/NN_slug
 The folder needs: lscript.py, lrender.py, lmix.py, make_vo.py (copy from long/01_aakhri_ghar_aage and edit)
 and meta.json with keys:
   long:   {title, description (may contain CHAPTERS), tags}
-  teaser: {title, description (contains LONG_URL), tags,
+  teaser (OPTIONAL, no longer used): {title, description (contains LONG_URL), tags,
            scenes: [scene ids to cut], top: [line1, line2],
            end_line: spoken Hindi line, end_text: [big line, line 2, line 3]}
   thumb:  {scene, t, l1, l2}
@@ -67,6 +67,10 @@ d.text((70, 150), th['l1'], font=fit(th['l1'], 170), fill=(255, 244, 220), strok
 d.text((80, 420), th['l2'], font=fit(th['l2'], 120), fill=(255, 214, 64), stroke_width=10, stroke_fill=(60, 20, 0))
 d.rounded_rectangle([80, 640, 600, 740], radius=45, fill=(229, 57, 53)); d.text((120, 650), 'पूरी कहानी', font=F(60), fill=(255, 255, 255))
 im.convert('RGB').resize((1280, 720)).save('thumbnail.jpg', quality=92)
+im.convert('RGB').resize((320, 180)).save('thumbnail_small.jpg', quality=90)   # how it looks in the feed: must still read
+if 'teaser' not in meta:   # since Nov 2026 no teaser Short is made
+    json.dump(meta, open('meta.json', 'w'), ensure_ascii=False, indent=1)
+    print('DONE long', off); sys.exit(0)
 # teaser (9:16): cut chosen scenes + end card
 tz = meta['teaser']; a = starts[tz['scenes'][0]]
 last = tz['scenes'][-1]; b = starts[last] + round(Tt[last][0] * FPS) / FPS - 0.2
