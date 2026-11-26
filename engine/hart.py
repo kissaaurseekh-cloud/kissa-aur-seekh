@@ -40,7 +40,7 @@ def man(c, x, gy, s=1.0, mood='neutral', talk=False, t=0.0, look=(0, 0), old=0.0
     mouth(c, 0, cy + 36, 70, mood, talk, t)
     c.restore()
 
-def elephant(c, x, gy, s=1.0, t=0.0, pull=0.0, sad=0.0, look=(-1, 0), ear_speed=1.0, blink_off=0.0, sit=0.0, tint=None):
+def elephant(c, x, gy, s=1.0, t=0.0, pull=0.0, sad=0.0, look=(-1, 0), ear_speed=1.0, blink_off=0.0, sit=0.0, tint=None, trunk_up=False):
     """side view, facing left. pull: 0..1 leaning right (straining against rope)."""
     body = tint or '#9AA3AD'; dark = blend(body, '#4A5058', .35); light = blend(body, '#FFFFFF', .25)
     c.save(); c.translate(x, gy); c.scale(s, s)
@@ -70,14 +70,14 @@ def elephant(c, x, gy, s=1.0, t=0.0, pull=0.0, sad=0.0, look=(-1, 0), ear_speed=
     # trunk
     sw = math.sin(t * 1.8) * 20 * (1 - sad)
     tr = skia.Path(); tr.moveTo(hx - 110, hy + 20)
-    if pull > .3:
+    if pull > .3 or trunk_up:
         tr.cubicTo(hx - 210, hy + 40, hx - 260, hy - 60, hx - 300, hy - 140)
     else:
         tr.cubicTo(hx - 190, hy + 120, hx - 170 + sw, hy + 250, hx - 210 + sw, hy + 330 - sad * 40)
     c.drawPath(tr, P(C(body), 58))
     for i in range(5):
         f = 0.25 + i * 0.15
-        if pull > .3:
+        if pull > .3 or trunk_up:
             px, py = lerp(hx - 130, hx - 280, f), lerp(hy + 30, hy - 110, f)
         else:
             px, py = lerp(hx - 130, hx - 200 + sw, f), lerp(hy + 60, hy + 300, f)
