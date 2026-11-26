@@ -105,6 +105,8 @@ contradiction, told fast (~45 s), beat well-known stories told slowly.
     nothing important below y≈1650.
 - `mix.py`: a sound hit on frame 1 (stinger) and music already playing (no fade-in); one mood per scene
   plus 1–3 effects; voice clearly louder than music (ducking is in the file).
+  Scene-change sound = the template's `soft_swish()` only (≈19 dB under the voice). Never add loud or bright
+  whooshes at cuts or repeating whooshes/wing-flaps (Akshita: the old cut whoosh was disturbing).
 - Cover lines (thumbnail): 2 short Hindi lines (≤ 14 characters each) = the hook question split in two,
   e.g. "हाथी कमल से" / "कैसे बचा?". hook_time ≈ 1.0.
 

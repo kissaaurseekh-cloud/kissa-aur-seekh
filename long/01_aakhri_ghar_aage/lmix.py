@@ -133,7 +133,10 @@ o,T,L=S['outro']; warm(o,T,bpm=104,a=0.12)
 s1,e1=L[1][0],L[1][1]
 for f,nt in ((.28,88),(.45,91),(.8,96)):
     pr=o+s1+(e1-s1)*f; put(fx,tick(0.3,1500),pr); put(fx,marimba(nt,1,0.2)+marimba(nt+7,1,0.1),pr+0.08)
-for sid in list(S)[1:]: put(fx,whoosh(0.45,0.25),S[sid][0]-0.25)
+# scene-change swish: kept very soft and dark (Akshita, 27 Nov 2026: the old 0.25 whoosh at every cut was too loud)
+def soft_swish(d=0.35,a=0.12):   # ~19 dB under the voice (old whoosh was only 4 dB under)
+    t_=tt(d); return a*np.sin(np.pi*t_/d)**2*noise_band(d,1,24)
+for sid in list(S)[1:]: put(fx,soft_swish(),S[sid][0]-0.18)
 t=np.arange(N)/SR
 env=np.convolve(np.abs(voice),np.ones(SR//5)/(SR//5),'same')
 duck=1-0.5*np.clip(env/0.025,0,1)

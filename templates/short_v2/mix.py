@@ -171,12 +171,12 @@ drone(o,T,50,0.05); crickets(o,T,0.02)
 call=o+L[0][0]+(L[0][1]-L[0][0])*0.68
 put(fx,riser(call-o,0.12),o); shankh(call,1.4,0.16,50); sparkle(call+0.2,84,7,0.09)
 o,T,L=S['vishnu']
-drone(o,T,50,0.05); flaps(o,T,0.33,0.12); shankh(o,1.4,0.17,57); bell(o+0.4,0.16,880)
+drone(o,T,50,0.05); flaps(o,T,0.33,0.05); shankh(o,1.4,0.17,57); bell(o+0.4,0.16,880)
 tabla(o,T,110,0.15); sparkle(o+1.0,84,7,0.09)
 o,T,L=S['reveal']
 drone(o,T,50,0.045)
 launch=o+L[0][0]+(L[0][1]-L[0][0])*0.1; hit=launch+0.6
-put(fx,whoosh(0.7,0.35),launch); put(fx,stinger(),hit); splosh(hit+0.1,0.35)
+put(fx,whoosh(0.7,0.15),launch); put(fx,stinger(),hit); splosh(hit+0.1,0.35)
 bell(hit+0.3,0.18,880); sparkle(hit+0.4,84,7,0.1); tabla(hit,o+T-hit,110,0.16)
 o,T,L=S['lesson']
 put(mus,pad([50,57,62,66],T,0.035),o); bell(o+0.05,0.12,880)
@@ -184,7 +184,10 @@ for it in L: put(fx,marimba(84,1.5,0.17)+marimba(91,1.5,0.07),o+it[0]-0.08)
 o,T,L=S['outro']
 drone(o,T,50,0.05)
 pr=o+L[0][0]+(L[0][1]-L[0][0])*0.7; put(fx,tick(0.3,1500),pr); put(fx,marimba(96,1,0.2)+marimba(103,1,0.1),pr+0.08)
-for sid in list(S)[1:]: put(fx,whoosh(0.45,0.25),S[sid][0]-0.25)
+# scene-change swish: kept very soft and dark (Akshita, 27 Nov 2026: the old 0.25 whoosh at every cut was too loud)
+def soft_swish(d=0.35,a=0.12):   # ~19 dB under the voice (old whoosh was only 4 dB under)
+    t_=tt(d); return a*np.sin(np.pi*t_/d)**2*noise_band(d,1,24)
+for sid in list(S)[1:]: put(fx,soft_swish(),S[sid][0]-0.18)
 t=np.arange(N)/SR
 env=np.convolve(np.abs(voice),np.ones(SR//5)/(SR//5),'same')
 duck=1-0.5*np.clip(env/0.025,0,1)
