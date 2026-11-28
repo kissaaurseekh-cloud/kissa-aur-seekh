@@ -1,5 +1,5 @@
 {
- "next_number": 10,
+ "next_number": 11,
  "published": [
   {
    "slug": "01_aakhri_ghar",
@@ -55,6 +55,12 @@
    "title": "Indra Ka Swarg Ek Maala Se Kaise Chhina? 😳 लक्ष्मी जी की कथा #shorts",
    "youtube_id": "48BNOwyFX8s",
    "date": "2026-11-27"
+  },
+  {
+   "slug": "10_bheem_hanuman",
+   "title": "Hanuman Ji Ki Poonch Bheem Se Kyun Nahi Uthi? 😳 भीम हनुमान कथा #shorts",
+   "youtube_id": "031AFcIBRqE",
+   "date": "2026-11-28"
   }
  ],
  "queue": [],
