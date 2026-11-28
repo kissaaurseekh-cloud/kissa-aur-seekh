@@ -5,6 +5,56 @@
    "pick": "01_aakhri_ghar",
    "long_folder": "long/01_aakhri_ghar_aage",
    "status": "manual (scheduled separately)"
+  },
+  {
+   "sunday": "2026-11-29",
+   "pick": "07_ganesh_parikrama",
+   "pick_id": "TWr7XQ1yV4s",
+   "status": "picked",
+   "ranking": [
+    [
+     "07_ganesh_parikrama",
+     930,
+     17,
+     1,
+     1415
+    ],
+    [
+     "06_neelkanth",
+     255,
+     10,
+     2,
+     625
+    ],
+    [
+     "09_durvasa_mala",
+     153,
+     3,
+     1,
+     288
+    ],
+    [
+     "03_toota_ghada",
+     50,
+     1,
+     1,
+     135
+    ],
+    [
+     "08_gajendra_moksh",
+     45,
+     1,
+     1,
+     130
+    ],
+    [
+     "10_bheem_hanuman",
+     0,
+     0,
+     1,
+     60
+    ]
+   ]
   }
  ]
 }
